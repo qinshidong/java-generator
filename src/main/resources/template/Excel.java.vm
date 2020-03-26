@@ -1,0 +1,30 @@
+package ${package}.modules.${moduleName}.excel;
+
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.util.Date;
+
+/**
+ * ${comments}
+ *
+ * @author ${author} ${email}
+ * @since ${version} ${date}
+ */
+public class ${className}Excel {
+#foreach ($column in $columns)
+    @Excel(name = "$!column.comments")
+    private $column.attrType $column.attrname;
+#end
+
+#foreach ($column in $columns)
+    public void set${column.attrName}($column.attrType $column.attrname) {
+        this.$column.attrname = $column.attrname;
+    }
+    public $column.attrType get${column.attrName}() {
+        return $column.attrname;
+    }
+#end
+}

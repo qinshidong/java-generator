@@ -1,0 +1,38 @@
+package ${package}.modules.${moduleName}.dto;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.util.Date;
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+import java.util.Date;
+
+/**
+ * ${comments}
+ *
+ * @author ${author} ${email}
+ * @since ${version} ${date}
+ */
+@ApiModel(value = "${comments}")
+public class ${className}DTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+	@ApiModelProperty(value = "$column.comments")
+	private $column.attrType $column.attrname;
+
+#end
+
+#foreach ($column in $columns)
+	public void set${column.attrName}($column.attrType $column.attrname) {
+		this.$column.attrname = $column.attrname;
+	}
+	public $column.attrType get${column.attrName}() {
+		return $column.attrname;
+	}
+#end
+}

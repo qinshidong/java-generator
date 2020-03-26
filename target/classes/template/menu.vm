@@ -1,0 +1,46 @@
+-- 【MySQL、PostgreSQL】菜单初始SQL
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date)VALUES ('${uuid0}', '8b737239a3724f3aa234183be9a0f580', '${moduleName}/${pathName}', NULL, 0, 'icon-desktop', 0, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid1}', '${uuid0}', NULL, '${moduleName}:${pathName}:page,${moduleName}:${pathName}:info', 1, NULL, 0, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid2}', '${uuid0}', NULL, '${moduleName}:${pathName}:save', 1, NULL, 1, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid3}', '${uuid0}', NULL, '${moduleName}:${pathName}:update', 1, NULL, 2, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid4}', '${uuid0}', NULL, '${moduleName}:${pathName}:delete', 1, NULL, 3, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid5}', '${uuid0}', NULL, '${moduleName}:${pathName}:export', 1, NULL, 4, '38d2b277e634412383c3fd60cd0e4c08', now(), '38d2b277e634412383c3fd60cd0e4c08', now());
+
+-- Oracle菜单初始SQL
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date)VALUES ('${uuid0}', '8b737239a3724f3aa234183be9a0f580', '${moduleName}/${pathName}', NULL, 0, 'icon-desktop', 0, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid1}', '${uuid0}', NULL, '${moduleName}:${pathName}:page,${moduleName}:${pathName}:info', 1, NULL, 0, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid2}', '${uuid0}', NULL, '${moduleName}:${pathName}:save', 1, NULL, 1, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid3}', '${uuid0}', NULL, '${moduleName}:${pathName}:update', 1, NULL, 2, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid4}', '${uuid0}', NULL, '${moduleName}:${pathName}:delete', 1, NULL, 3, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid5}', '${uuid0}', NULL, '${moduleName}:${pathName}:export', 1, NULL, 4, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE, '38d2b277e634412383c3fd60cd0e4c08', CURRENT_DATE);
+
+-- SQL Server菜单初始SQL
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date)VALUES ('${uuid0}', '8b737239a3724f3aa234183be9a0f580', '${moduleName}/${pathName}', NULL, 0, 'icon-desktop', 0, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid1}', '${uuid0}', NULL, '${moduleName}:${pathName}:page,${moduleName}:${pathName}:info', 1, NULL, 0, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid2}', '${uuid0}', NULL, '${moduleName}:${pathName}:save', 1, NULL, 1, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid3}', '${uuid0}', NULL, '${moduleName}:${pathName}:update', 1, NULL, 2, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid4}', '${uuid0}', NULL, '${moduleName}:${pathName}:delete', 1, NULL, 3, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+INSERT INTO sys_menu(id, pid, url, permissions, type, icon, sort, creater, create_date, updater, update_date) VALUES ('${uuid5}', '${uuid0}', NULL, '${moduleName}:${pathName}:export', 1, NULL, 4, '38d2b277e634412383c3fd60cd0e4c08', getdate(), '38d2b277e634412383c3fd60cd0e4c08', getdate());
+
+
+
+-- 【MySQL、Oracle、PostgreSQL、SQL Server】菜单国际化初始SQL
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid0}', 'name', '$!comments', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid0}', 'name', '$!comments', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid0}', 'name', '$!comments', 'zh-TW');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid1}', 'name', 'View', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid1}', 'name', '查看', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid1}', 'name', '查看', 'zh-TW');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid2}', 'name', 'Add', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid2}', 'name', '新增', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid2}', 'name', '新增', 'zh-TW');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid3}', 'name', 'Edit', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid3}', 'name', '修改', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid3}', 'name', '修改', 'zh-TW');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid4}', 'name', 'Delete', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid4}', 'name', '删除', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid4}', 'name', '刪除', 'zh-TW');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid5}', 'name', 'Export', 'en-US');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid5}', 'name', '导出', 'zh-CN');
+INSERT INTO sys_language(table_name, table_id, field_name, field_value, language) VALUES ('sys_menu', '${uuid5}', 'name', '導出', 'zh-TW');
+
