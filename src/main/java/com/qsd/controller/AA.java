@@ -1,17 +1,26 @@
 package com.qsd.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 import com.qsd.utils.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.dom4j.*;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
+import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 @RestController
 public class AA {
@@ -98,6 +107,219 @@ public class AA {
         } finally {
             pool.close(connection);
         }
+    }
+
+    /**
+     * xml转map 带属性
+     *
+     * @param xmlStr
+     * @param needRootKey 是否需要在返回的map里加根节点键
+     * @return
+     * @throws DocumentException
+     */
+    @RequestMapping("666")
+    public static Map xml2mapWithAttr(String xmlStr, boolean needRootKey) throws DocumentException {
+
+        Document doc = DocumentHelper.parseText(xmlStr);
+
+        Element root = doc.getRootElement();
+
+        Map<String, Object> map = (Map<String, Object>) xml2mapWithAttr(root);
+
+        if (root.elements().size() == 0 && root.attributes().size() == 0) {
+
+            return map; //根节点只有一个文本内容
+
+        }
+
+        if (needRootKey) {
+
+            //在返回的map里加根节点键（如果需要）
+
+            Map<String, Object> rootMap = new HashMap<String, Object>();
+
+            rootMap.put(root.getName(), map);
+
+            return rootMap;
+
+        }
+
+        return map;
+
+    }
+
+    /**
+     * xml转map 带属性
+     *
+     * @param
+     * @return
+     */
+
+    private static Map xml2mapWithAttr(Element element) {
+
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+
+        List<Element> list = element.elements();
+
+        List<Attribute> listAttr0 = element.attributes(); // 当前节点的所有属性的list
+
+        for (Attribute attr : listAttr0) {
+
+            map.put(attr.getName(), attr.getValue());
+
+        }
+
+        if (list.size() > 0) {
+
+            for (int i = 0; i < list.size(); i++) {
+
+                Element iter = list.get(i);
+
+                List mapList = new ArrayList();
+
+
+                if (iter.elements().size() > 0) {
+
+                    Map m = xml2mapWithAttr(iter);
+
+                    if (map.get(iter.getName()) != null) {
+
+                        Object obj = map.get(iter.getName());
+
+                        if (!(obj instanceof List)) {
+
+                            mapList = new ArrayList();
+
+                            mapList.add(obj);
+
+                            mapList.add(m);
+
+                        }
+
+                        if (obj instanceof List) {
+
+                            mapList = (List) obj;
+
+                            mapList.add(m);
+
+                        }
+
+                        map.put(iter.getName(), mapList);
+
+                    } else
+
+                        map.put(iter.getName(), m);
+
+                } else {
+
+                    List<Attribute> listAttr = iter.attributes(); // 当前节点的所有属性的list
+
+                    Map<String, Object> attrMap = null;
+
+                    boolean hasAttributes = false;
+
+                    if (listAttr.size() > 0) {
+
+                        hasAttributes = true;
+
+                        attrMap = new LinkedHashMap<String, Object>();
+
+                        for (Attribute attr : listAttr) {
+
+                            attrMap.put(attr.getName(), attr.getValue());
+
+                        }
+
+                    }
+
+                    if (map.get(iter.getName()) != null) {
+
+                        Object obj = map.get(iter.getName());
+
+                        if (!(obj instanceof List)) {
+
+                            mapList = new ArrayList();
+
+                            mapList.add(obj);
+
+                            // mapList.add(iter.getText());
+
+                            if (hasAttributes) {
+
+                                attrMap.put("content", iter.getText());
+
+                                mapList.add(attrMap);
+
+                            } else {
+
+                                mapList.add(iter.getText());
+
+                            }
+
+                        }
+
+                        if (obj instanceof List) {
+
+                            mapList = (List) obj;
+
+                            // mapList.add(iter.getText());
+
+                            if (hasAttributes) {
+
+                                attrMap.put("content", iter.getText());
+
+                                mapList.add(attrMap);
+
+                            } else {
+
+                                mapList.add(iter.getText());
+
+                            }
+
+                        }
+
+                        map.put(iter.getName(), mapList);
+
+                    } else {
+
+                        // map.put(iter.getName(), iter.getText());
+
+                        if (hasAttributes) {
+
+                            attrMap.put("content", iter.getText());
+
+                            map.put(iter.getName(), attrMap);
+
+                        } else {
+
+                            map.put(iter.getName(), iter.getText());
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        } else {
+
+            // 根节点的
+
+            if (listAttr0.size() > 0) {
+
+                map.put("content", element.getText());
+
+            } else {
+
+                map.put(element.getName(), element.getText());
+
+            }
+
+        }
+
+        return map;
+
     }
 
 }
