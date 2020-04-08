@@ -118,13 +118,13 @@ public class AA {
      * @throws DocumentException
      */
     @RequestMapping("666")
-    public static Map xml2mapWithAttr(String xmlStr, boolean needRootKey) throws DocumentException {
+    public static Map xmlToMap(String xmlStr, boolean needRootKey) throws DocumentException {
 
         Document doc = DocumentHelper.parseText(xmlStr);
 
         Element root = doc.getRootElement();
 
-        Map<String, Object> map = (Map<String, Object>) xml2mapWithAttr(root);
+        Map<String, Object> map = (Map<String, Object>) xmlToMapWithAttr(root);
 
         if (root.elements().size() == 0 && root.attributes().size() == 0) {
 
@@ -155,7 +155,7 @@ public class AA {
      * @return
      */
 
-    private static Map xml2mapWithAttr(Element element) {
+    private static Map xmlToMapWithAttr(Element element) {
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
 
@@ -180,7 +180,7 @@ public class AA {
 
                 if (iter.elements().size() > 0) {
 
-                    Map m = xml2mapWithAttr(iter);
+                    Map m = xmlToMapWithAttr(iter);
 
                     if (map.get(iter.getName()) != null) {
 
@@ -214,87 +214,9 @@ public class AA {
 
                     List<Attribute> listAttr = iter.attributes(); // 当前节点的所有属性的list
 
-                    Map<String, Object> attrMap = null;
-
-                    boolean hasAttributes = false;
-
                     if (listAttr.size() > 0) {
 
-                        hasAttributes = true;
-
-                        attrMap = new LinkedHashMap<String, Object>();
-
-                        for (Attribute attr : listAttr) {
-
-                            attrMap.put(attr.getName(), attr.getValue());
-
-                        }
-
-                    }
-
-                    if (map.get(iter.getName()) != null) {
-
-                        Object obj = map.get(iter.getName());
-
-                        if (!(obj instanceof List)) {
-
-                            mapList = new ArrayList();
-
-                            mapList.add(obj);
-
-                            // mapList.add(iter.getText());
-
-                            if (hasAttributes) {
-
-                                attrMap.put("content", iter.getText());
-
-                                mapList.add(attrMap);
-
-                            } else {
-
-                                mapList.add(iter.getText());
-
-                            }
-
-                        }
-
-                        if (obj instanceof List) {
-
-                            mapList = (List) obj;
-
-                            // mapList.add(iter.getText());
-
-                            if (hasAttributes) {
-
-                                attrMap.put("content", iter.getText());
-
-                                mapList.add(attrMap);
-
-                            } else {
-
-                                mapList.add(iter.getText());
-
-                            }
-
-                        }
-
-                        map.put(iter.getName(), mapList);
-
-                    } else {
-
-                        // map.put(iter.getName(), iter.getText());
-
-                        if (hasAttributes) {
-
-                            attrMap.put("content", iter.getText());
-
-                            map.put(iter.getName(), attrMap);
-
-                        } else {
-
-                            map.put(iter.getName(), iter.getText());
-
-                        }
+                        map.put(listAttr.get(0).getValue(), iter.getText());
 
                     }
 
